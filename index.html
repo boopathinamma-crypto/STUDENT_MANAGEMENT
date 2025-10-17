@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GradeGenius - Student Management System</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+        .hero-gradient {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i data-feather="book-open" class="text-indigo-600 h-6 w-6"></i>
+                        <span class="ml-2 text-xl font-bold text-gray-900">GradeGenius</span>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="#" class="px-3 py-2 text-sm font-medium text-indigo-600">Home</a>
+                    <a href="login.html" class="px-3 py-2 text-sm font-medium text-gray-500 hover:text-indigo-600">Login</a>
+</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-gradient text-white">
+        <div class="max-w-7xl mx-auto py-24 px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+                Transform Your Classroom Management
+            </h1>
+            <p class="mt-6 max-w-3xl mx-auto text-xl">
+                GradeGenius simplifies student tracking, grade management, and analytics in one powerful platform.
+            </p>
+            <div class="mt-10">
+                <a href="/register.html" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50">
+                    Get Started Today
+                    <i data-feather="arrow-right" class="ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center">
+                <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">Features</h2>
+                <p class="mt-2 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    Everything you need in one place
+                </p>
+            </div>
+
+            <div class="mt-10">
+                <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                            <i data-feather="users"></i>
+                        </div>
+                        <h3 class="mt-4 text-lg font-medium text-gray-900">Student Management</h3>
+                        <p class="mt-2 text-base text-gray-500">
+                            Easily track student information, attendance, and contact details.
+                        </p>
+                    </div>
+
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                            <i data-feather="bar-chart-2"></i>
+                        </div>
+                        <h3 class="mt-4 text-lg font-medium text-gray-900">Grade Analytics</h3>
+                        <p class="mt-2 text-base text-gray-500">
+                            Visualize student performance with detailed charts and reports.
+                        </p>
+                    </div>
+
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                            <i data-feather="file-text"></i>
+                        </div>
+                        <h3 class="mt-4 text-lg font-medium text-gray-900">Report Generation</h3>
+                        <p class="mt-2 text-base text-gray-500">
+                            Automatically generate printable reports for students and parents.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Analytics Section -->
+    <div id="analytics" class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center">
+                <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">Analytics</h2>
+                <p class="mt-2 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    Detailed performance insights
+                </p>
+            </div>
+
+            <div class="mt-10">
+                <!-- Charts Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <!-- Performance Trend -->
+                    <div class="bg-white shadow rounded-lg p-6">
+                        <h2 class="text-lg font-medium text-gray-900 mb-4">Performance Trend</h2>
+                        <div class="h-64">
+                            <canvas id="trendChart"></canvas>
+                        </div>
+                    </div>
+                    <!-- Grade Distribution -->
+                    <div class="bg-white shadow rounded-lg p-6">
+                        <h2 class="text-lg font-medium text-gray-900 mb-4">Grade Distribution</h2>
+                        <div class="h-64">
+                            <canvas id="distributionChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Class Comparison -->
+                <div class="bg-white shadow rounded-lg p-6 mb-8">
+                    <h2 class="text-lg font-medium text-gray-900 mb-4">Class Comparison</h2>
+                    <div class="h-96">
+                        <canvas id="comparisonChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Students Section -->
+    <div id="students" class="py-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center">
+                <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">Students</h2>
+                <p class="mt-2 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    Manage your students
+                </p>
+            </div>
+
+            <div class="mt-10">
+                <div class="bg-white shadow rounded-lg overflow-hidden">
+                    <div class="px-4 py-5 sm:px-6 border-b border-gray-200">
+                        <h3 class="text-lg leading-6 font-medium text-gray-900">Top Performers</h3>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Student</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Class</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Average</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold">MB</div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-gray-900">Michael Brown</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">10A</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                            92.5%
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-bold">SJ</div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-gray-900">Sarah Johnson</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">10B</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                                            87.2%
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="bg-indigo-700">
+<div class="max-w-2xl mx-auto text-center py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+                <span class="block">Ready to simplify your classroom?</span>
+                <span class="block">Start using GradeGenius today.</span>
+            </h2>
+            <a href="/register.html" class="mt-8 w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50 sm:w-auto">
+                Sign up for free
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="xl:grid xl:grid-cols-3 xl:gap-8">
+                <div class="space-y-8 xl:col-span-1">
+                    <div class="flex items-center">
+                        <i data-feather="book-open" class="text-white h-6 w-6"></i>
+                        <span class="ml-2 text-xl font-bold text-white">GradeGenius</span>
+                    </div>
+                    <p class="text-gray-300 text-base">
+                        Empowering educators with powerful classroom management tools.
+                    </p>
+                </div>
+                <div class="mt-12 grid grid-cols-2 gap-8 xl:mt-0 xl:col-span-2">
+                    <div class="md:grid md:grid-cols-2 md:gap-8">
+                        <div>
+                            <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase">Solutions</h3>
+                            <ul class="mt-4 space-y-4">
+                                <li><a href="#" class="text-base text-gray-400 hover:text-white">For Teachers</a></li>
+                                <li><a href="#" class="text-base text-gray-400 hover:text-white">For Schools</a></li>
+                            </ul>
+                        </div>
+                        <div class="mt-12 md:mt-0">
+                            <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase">Support</h3>
+                            <ul class="mt-4 space-y-4">
+                                <li><a href="#" class="text-base text-gray-400 hover:text-white">Documentation</a></li>
+                                <li><a href="#" class="text-base text-gray-400 hover:text-white">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-gray-700 pt-8">
+                <p class="text-base text-gray-400 text-center">
+                    &copy; 2023 GradeGenius. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        feather.replace();
+        
+        // Charts
+        document.addEventListener('DOMContentLoaded', function() {
+            if (document.getElementById('trendChart')) {
+                const trendCtx = document.getElementById('trendChart').getContext('2d');
+                const distributionCtx = document.getElementById('distributionChart').getContext('2d');
+                const comparisonCtx = document.getElementById('comparisonChart').getContext('2d');
+
+                // Performance Trend Chart
+                new Chart(trendCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [
+                            {
+                                label: 'Class Average',
+                                data: [72, 75, 78, 81, 83, 85],
+                                borderColor: '#4F46E5',
+                                backgroundColor: 'rgba(79, 70, 229, 0.1)',
+                                tension: 0.3,
+                                fill: true
+                            },
+                            {
+                                label: 'Top 10%',
+                                data: [85, 86, 88, 89, 91, 93],
+                                borderColor: '#10B981',
+                                backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                                tension: 0.3,
+                                fill: true
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                                min: 60,
+                                max: 100
+                            }
+                        }
+                    }
+                });
+
+                // Grade Distribution Chart
+                new Chart(distributionCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['A', 'B', 'C', 'D', 'F'],
+                        datasets: [{
+                            label: 'Students',
+                            data: [120, 210, 150, 80, 40],
+                            backgroundColor: [
+                                '#10B981',
+                                '#3B82F6',
+                                '#F59E0B',
+                                '#EF4444',
+                                '#6B7280'
+                            ],
+                            borderRadius: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+
+                // Class Comparison Chart
+                new Chart(comparisonCtx, {
+                    type: 'radar',
+                    data: {
+                        labels: ['Math', 'Science', 'English', 'History', 'Art'],
+                        datasets: [
+                            {
+                                label: '10A',
+                                data: [85, 78, 82, 79, 91],
+                                backgroundColor: 'rgba(79, 70, 229, 0.2)',
+                                borderColor: '#4F46E5',
+                                borderWidth: 2
+                            },
+                            {
+                                label: '10B',
+                                data: [78, 72, 80, 75, 88],
+                                backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                                borderColor: '#10B981',
+                                borderWidth: 2
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            }
+                        },
+                        scales: {
+                            r: {
+                                angleLines: {
+                                    display: true
+                                },
+                                suggestedMin: 60,
+                                suggestedMax: 100
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
